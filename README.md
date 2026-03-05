@@ -32,11 +32,29 @@ use OmniAuth::Builder do
            nil,
            team_id: ENV.fetch('APPLE_TEAM_ID'),
            key_id: ENV.fetch('APPLE_KEY_ID'),
-           pem: ENV.fetch('APPLE_PRIVATE_KEY_PEM')
+           pem: ENV.fetch('APPLE_PRIVATE_KEY_PEM').gsub('\\n', "\n")
 end
 ```
 
 `provider :apple2` is also supported. `provider :apple` exists for drop-in compatibility.
+
+## Apple Key PEM Handling
+
+Apple private keys are often stored in env vars with escaped newlines (`\\n`), which Ruby/OpenSSL cannot parse as a valid PEM until you normalize them.
+
+Use this pattern:
+
+```ruby
+pem: ENV.fetch('APPLE_PRIVATE_KEY_PEM').gsub('\\n', "\n")
+```
+
+If your secret manager supports multiline values, store the key as real multiline text and pass it directly without `gsub`.
+
+Common parsing failures caused by unnormalized keys:
+
+- `OpenSSL::PKey::ECError`
+- `Neither PUB key nor PRIV key`
+- `invalid curve name`
 
 ## Provider App Setup
 
