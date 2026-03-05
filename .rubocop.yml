@@ -1,0 +1,31 @@
+plugins:
+  - rubocop-minitest
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'lib/omniauth-apple2.rb'
+    - 'tmp/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'test/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'test/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'test/**/*'
+    - 'lib/omniauth/strategies/apple2.rb'
+
+Style/OneClassPerFile:
+  Exclude:
+    - 'test/rails_integration_test.rb'
+
+Minitest/MultipleAssertions:
+  Exclude:
+    - 'test/**/*'
