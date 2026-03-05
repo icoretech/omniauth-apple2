@@ -25,9 +25,11 @@ Configure OmniAuth in your Rack/Rails app:
 
 ```ruby
 use OmniAuth::Builder do
+  # Second positional arg is intentionally nil:
+  # client secret is generated internally from team_id/key_id/pem.
   provider :apple,
            ENV.fetch('APPLE_CLIENT_ID'),
-           '',
+           nil,
            team_id: ENV.fetch('APPLE_TEAM_ID'),
            key_id: ENV.fetch('APPLE_KEY_ID'),
            pem: ENV.fetch('APPLE_PRIVATE_KEY_PEM')
