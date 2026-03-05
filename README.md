@@ -1,7 +1,7 @@
 # OmniAuth Apple2 Strategy
 
 [![Test](https://github.com/icoretech/omniauth-apple2/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/icoretech/omniauth-apple2/actions/workflows/test.yml?query=branch%3Amain)
-[![Gem Version](https://img.shields.io/gem/v/omniauth-apple2.svg)](https://rubygems.org/gems/omniauth-apple2)
+[![Gem Version](https://badge.fury.io/rb/omniauth-apple2.svg)](https://badge.fury.io/rb/omniauth-apple2)
 
 `omniauth-apple2` provides a Sign in with Apple OAuth2 strategy for OmniAuth.
 
