@@ -1,4 +1,4 @@
-# OmniAuth Apple2 Strategy
+# OmniAuth Apple Strategy
 
 [![Test](https://github.com/icoretech/omniauth-apple2/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/icoretech/omniauth-apple2/actions/workflows/test.yml?query=branch%3Amain)
 [![Gem Version](https://badge.fury.io/rb/omniauth-apple2.svg)](https://badge.fury.io/rb/omniauth-apple2)
