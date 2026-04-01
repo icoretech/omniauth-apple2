@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-require 'omniauth/apple2/version'
-require 'omniauth/strategies/apple2'
+require "omniauth/apple2/version"
+require "omniauth/strategies/apple2"

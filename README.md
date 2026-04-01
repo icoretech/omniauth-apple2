@@ -120,7 +120,8 @@ Example payload from `request.env['omniauth.auth']` (real flow shape, anonymized
 
 ```bash
 bundle install
-bundle exec rake lint test_unit
+bundle exec standardrb --fix
+bundle exec rake test_unit
 RAILS_VERSION='~> 8.1.0' bundle exec rake test_rails_integration
 ```
 

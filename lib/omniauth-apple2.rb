@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require 'omniauth/apple2'
+require "omniauth/apple2"

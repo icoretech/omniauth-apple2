@@ -9,7 +9,7 @@
 ## Local Commands
 
 ```bash
-bundle exec rake lint
+bundle exec standardrb --fix
 bundle exec rake test_unit
 bundle exec rake test_rails_integration
 ```
