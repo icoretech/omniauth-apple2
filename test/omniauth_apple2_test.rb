@@ -109,6 +109,24 @@ class OmniauthApple2Test < Minitest::Test
     assert_raises(OmniAuth::Strategies::OAuth2::CallbackError) { strategy.extra }
   end
 
+  def test_rejects_missing_nonce_when_apple_marks_nonce_supported
+    strategy = strategy_with_token_and_jwks(
+      id_token_payload: {
+        "sub" => "apple-user-id",
+        "aud" => "com.example.web",
+        "iss" => "https://appleid.apple.com",
+        "iat" => Time.now.to_i,
+        "exp" => Time.now.to_i + 300,
+        "nonce_supported" => true
+      },
+      stored_nonce: "expected-nonce"
+    )
+
+    error = assert_raises(OmniAuth::Strategies::OAuth2::CallbackError) { strategy.uid }
+
+    assert_equal :id_token_nonce_invalid, error.error
+  end
+
   def test_request_phase_redirects_to_apple_with_expected_params
     previous_request_validation_phase = OmniAuth.config.request_validation_phase
     OmniAuth.config.request_validation_phase = nil
@@ -143,7 +161,7 @@ class OmniauthApple2Test < Minitest::Test
 
   private
 
-  def strategy_with_token_and_jwks(id_token_payload:, user_payload: nil)
+  def strategy_with_token_and_jwks(id_token_payload:, user_payload: nil, stored_nonce: nil)
     strategy = build_strategy
     id_token = JWT.encode(id_token_payload, @id_token_rsa_key, "RS256", {kid: "test-kid"})
 
@@ -157,6 +175,7 @@ class OmniauthApple2Test < Minitest::Test
 
     request_env = Rack::MockRequest.env_for("/auth/apple2/callback?code=abc")
     request_env["rack.session"] = {}
+    request_env["rack.session"]["omniauth.nonce"] = stored_nonce if stored_nonce
     request = Rack::Request.new(request_env)
     request.update_param("user", user_payload.to_json) if user_payload
 

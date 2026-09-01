@@ -141,7 +141,8 @@ class RailsIntegrationTest < Minitest::Test
           email: "sample@example.test",
           email_verified: "true",
           is_private_email: "false",
-          nonce: nonce
+          nonce: nonce,
+          nonce_supported: true
         },
         RailsIntegrationApp::TEST_ID_TOKEN_RSA_KEY,
         "RS256",

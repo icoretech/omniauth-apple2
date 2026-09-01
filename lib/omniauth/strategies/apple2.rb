@@ -138,12 +138,11 @@ module OmniAuth
       end
 
       def verify_nonce!(payload)
-        return unless payload.key?("nonce")
-
         expected_nonce = stored_nonce
+        return if blank?(payload["nonce"]) && !true_claim?(payload["nonce_supported"])
         return if payload["nonce"] == expected_nonce
 
-        raise CallbackError.new(:id_token_nonce_invalid, "nonce does not match")
+        raise CallbackError.new(:id_token_nonce_invalid, "nonce is missing or does not match")
       end
 
       def fetch_jwk(expected_kid)
